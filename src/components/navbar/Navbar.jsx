@@ -17,7 +17,11 @@ const Navbar = () => {
             About
           </Link>
         </li>
-        {/* Add more navigation items as needed */}
+        <li className={styles.navItem}>
+          <Link to="/tictactoe" className={styles.navLink}>
+            Game
+          </Link>
+        </li>
       </ul>
     </nav>
   );
