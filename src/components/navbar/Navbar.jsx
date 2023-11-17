@@ -22,6 +22,11 @@ const Navbar = () => {
             Game
           </Link>
         </li>
+        <li className={styles.navItem}>
+          <Link to="/projects" className={styles.navLink}>
+            Projects
+          </Link>
+        </li>
       </ul>
     </nav>
   );
