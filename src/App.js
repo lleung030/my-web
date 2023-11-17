@@ -1,12 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import TicTacToe from './components/game/TicTacToe';
 
 function App() {
   return (
-    <div className="App">
-      hi this is Lucas 
-    </div>
-  );
+    <TicTacToe />
+  )
 }
 
-export default App;
+export default App
