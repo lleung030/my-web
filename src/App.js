@@ -4,28 +4,28 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import TicTacToe from './components/game/TicTacToe';
 import Home from './components/home/Home';
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Projects() {
-  return <h2>Projects</h2>;
-}
+import About from './components/about/About';
+import Projects from './components/projects/Projects';
+import ContactMe from './components/contact/ContactMe';
+import DarkModeToggle from './components/darkmodetoggle/DarkModeToggle';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 function App() {
   return (
     <Router>
-      
-      <div>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/tictactoe" element={<TicTacToe />} />
-          <Route path="/projects" element={<Projects />} />
-        </Routes>
-      </div>
+      <DarkModeProvider>
+        <div>
+          <Navbar />
+          <DarkModeToggle />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/tictactoe" element={<TicTacToe />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<ContactMe />} />
+          </Routes>
+        </div>
+      </DarkModeProvider>
     </Router>
   );
 }
