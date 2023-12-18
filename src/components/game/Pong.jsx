@@ -6,14 +6,19 @@ class Pong extends Component {
     this.state = {
       position: { x: 0, y: 0 },
       direction: { x: 1, y: 1 },
-      ballSize: 50, // Added ball size for better boundary calculations
+      ballSize: 50,
+      paddleSize: 100, // Adjust paddle size
+      paddles: [
+        { x: 0, y: 0 }, // Left paddle initial position
+        { x: window.innerWidth - 10, y: 0 }, // Right paddle initial position
+      ],
     };
   }
 
   componentDidMount() {
     this.intervalId = setInterval(() => {
       this.updateBallPosition();
-    }, 16); // Adjusted interval for smoother animation (60 frames per second)
+    }, 16);
   }
 
   componentWillUnmount() {
@@ -21,13 +26,11 @@ class Pong extends Component {
   }
 
   updateBallPosition = () => {
-    const { position, direction, ballSize } = this.state;
+    const { position, direction, ballSize, paddles } = this.state;
     const { x, y } = position;
 
-    // Set the speed of the ball (you can adjust this value)
     const speed = 5;
 
-    // Calculate the new position based on the current direction and speed
     const newPosition = {
       x: x + direction.x * speed,
       y: y + direction.y * speed,
@@ -35,14 +38,12 @@ class Pong extends Component {
 
     // Check if the ball hits the window boundaries
     if (newPosition.x >= window.innerWidth - ballSize || newPosition.x <= 0) {
-      // Reverse the direction in the x-axis
       this.setState({
         direction: { x: -direction.x, y: direction.y },
       });
     }
 
     if (newPosition.y >= window.innerHeight - ballSize || newPosition.y <= 0) {
-      // Reverse the direction in the y-axis
       this.setState({
         direction: { x: direction.x, y: -direction.y },
       });
@@ -52,25 +53,53 @@ class Pong extends Component {
     this.setState({
       position: newPosition,
     });
+
+    // Check if the ball hits the paddles
+    paddles.forEach((paddle) => {
+      if (
+        newPosition.x >= paddle.x &&
+        newPosition.x <= paddle.x + 10 &&
+        newPosition.y >= paddle.y &&
+        newPosition.y <= paddle.y + this.state.paddleSize
+      ) {
+        this.setState({
+          direction: { x: -direction.x, y: direction.y },
+        });
+      }
+    });
   };
 
   render() {
     const { x, y } = this.state.position;
+    const { paddles, paddleSize } = this.state;
 
     const ballStyle = {
       position: 'absolute',
       top: `${y}px`,
       left: `${x}px`,
-      width: '50px', // Adjust the width
-      height: '50px', // Adjust the height
-      backgroundColor: 'yellow', // You can add other styles as needed
-      borderRadius: '50%', // This makes the div a circle
+      width: '50px',
+      height: '50px',
+      backgroundColor: 'yellow',
+      borderRadius: '50%',
     };
 
     return (
-      <pre style={ballStyle}>
-        |o_o |
-      </pre>
+      <div>
+        <pre style={ballStyle}>|o_o |</pre>
+        {paddles.map((paddle, index) => (
+          <div
+            key={index}
+            style={{
+              position: 'absolute',
+              top: `${paddle.y}px`,
+              left: `${paddle.x}px`,
+              width: '10px',
+              height: `${paddleSize}px`,
+              backgroundColor: 'blue',
+            }}
+          />
+        ))}
+      </div>
     );
   }
 }
