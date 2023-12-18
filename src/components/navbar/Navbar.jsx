@@ -19,7 +19,12 @@ const Navbar = () => {
         </li>
         <li className={styles.navItem}>
           <Link to="/tictactoe" className={styles.navLink}>
-            Game
+            Tic Tac Toe Game
+          </Link>
+	 </li>
+	 <li className={styles.navItem}>
+          <Link to="/pong" className={styles.navLink}>
+            Pong Game
           </Link>
         </li>
         <li className={styles.navItem}>
