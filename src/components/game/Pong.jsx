@@ -19,11 +19,66 @@ class Pong extends Component {
     this.intervalId = setInterval(() => {
       this.updateBallPosition();
     }, 16);
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keyup', this.handleKeyUp);
   }
 
   componentWillUnmount() {
     clearInterval(this.intervalId);
+      
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('keyup', this.handleKeyUp);
   }
+  handleKeyDown = (event) => {
+    const { paddles, paddleSize } = this.state;
+    const speed = 5;
+
+    // Move the left paddle down (key: s)
+    if (event.key === 's') {
+      this.setState((prevState) => {
+        const newY = Math.min(
+          window.innerHeight - paddleSize,
+          prevState.paddles[0].y + speed
+        );
+        return {
+          paddles: [{ x: 0, y: newY }, paddles[1]],
+        };
+      });
+    }
+
+    // Move the left paddle up (key: w)
+    if (event.key === 'w') {
+      this.setState((prevState) => {
+        const newY = Math.max(0, prevState.paddles[0].y - speed);
+        return {
+          paddles: [{ x: 0, y: newY }, paddles[1]],
+        };
+      });
+    }
+
+      // Move the right paddle down (key: ArrowDown)
+    if (event.key === 'ArrowDown') {
+      this.setState((prevState) => {
+        const newY = Math.min(
+          window.innerHeight - paddleSize,
+          prevState.paddles[1].y + speed
+        );
+        return {
+          paddles: [paddles[0], { x: window.innerWidth - 10, y: newY }],
+        };
+      });
+    }
+
+    // Move the right paddle up (key: ArrowUp)
+    if (event.key === 'ArrowUp') {
+      this.setState((prevState) => {
+        const newY = Math.max(0, prevState.paddles[1].y - speed);
+        return {
+          paddles: [paddles[0], { x: window.innerWidth - 10, y: newY }],
+        };
+      });
+    }
+  };
 
   updateBallPosition = () => {
     const { position, direction, ballSize, paddles } = this.state;
