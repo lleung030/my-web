@@ -12,6 +12,7 @@ class Pong extends Component {
         { x: 0, y: 0 }, // Left paddle initial position
         { x: window.innerWidth - 10, y: 0 }, // Right paddle initial position
       ],
+	scores: { left: 0, right: 0 },
     };
   }
 
@@ -93,11 +94,12 @@ class Pong extends Component {
         { x: 0, y: 0 },
         { x: window.innerWidth - 10, y: 0 },
       ],
+	scores: { left: 0, right: 0 },
     });
   };
 
   updateBallPosition = () => {
-    const { position, direction, ballSize, paddles } = this.state;
+    const { position, direction, ballSize, paddles, scores } = this.state;
     const { x, y } = position;
 
     const speed = 5;
@@ -108,7 +110,20 @@ class Pong extends Component {
     };
 
     // Check if the ball hits the window boundaries
-    if (newPosition.x >= window.innerWidth - ballSize || newPosition.x <= 0) {
+      if (newPosition.x >= window.innerWidth - ballSize || newPosition.x <= 0) {
+      // Handle scoring
+      if (newPosition.x >= window.innerWidth - ballSize) {
+        this.setState((prevState) => ({
+            scores: { ...prevState.scores, left: prevState.scores.left + 1 },
+	    position: { x: 0, y: 0 }
+        }));
+      } else {
+        this.setState((prevState) => ({
+            scores: { ...prevState.scores, right: prevState.scores.right + 1 },
+	    position: { x: 0, y: 0 }
+        }));
+      }
+
       this.setState({
         direction: { x: -direction.x, y: direction.y },
       });
@@ -142,7 +157,7 @@ class Pong extends Component {
 
   render() {
     const { x, y } = this.state.position;
-    const { paddles, paddleSize } = this.state;
+      const { paddles, paddleSize, scores } = this.state;
 
     const ballStyle = {
       position: 'absolute',
@@ -158,6 +173,8 @@ class Pong extends Component {
       <div>
           <pre style={ballStyle}>|o_o |</pre>
 	  <button onClick={this.handleRestart}>Restart</button>
+	  <p>Left Player Score: {scores.left}</p>
+	  <p>Right Player Score: {scores.right}</p>
         {paddles.map((paddle, index) => (
           <div
             key={index}
