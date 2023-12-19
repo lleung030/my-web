@@ -7,7 +7,7 @@ class Pong extends Component {
       position: { x: 0, y: 0 },
       direction: { x: 1, y: 1 },
       ballSize: 50,
-      paddleSize: 100, // Adjust paddle size
+      paddleSize: 300, // Adjust paddle size
       paddles: [
         { x: 0, y: 0 }, // Left paddle initial position
         { x: window.innerWidth - 10, y: 0 }, // Right paddle initial position
@@ -31,17 +31,21 @@ class Pong extends Component {
   }
   handleKeyDown = (event) => {
     const { paddles, paddleSize } = this.state;
-    const speed = 5;
+    const speed = 20;
 
+    if (event.key === ' ') {
+      this.handleRestart();
+    }
+      
     // Move the left paddle down (key: s)
     if (event.key === 's') {
       this.setState((prevState) => {
-        const newY = Math.min(
+        const newHeight = Math.min(
           window.innerHeight - paddleSize,
           prevState.paddles[0].y + speed
         );
         return {
-          paddles: [{ x: 0, y: newY }, paddles[1]],
+          paddles: [{ x: 0, y: newHeight }, paddles[1]],
         };
       });
     }
@@ -49,9 +53,9 @@ class Pong extends Component {
     // Move the left paddle up (key: w)
     if (event.key === 'w') {
       this.setState((prevState) => {
-        const newY = Math.max(0, prevState.paddles[0].y - speed);
+        const newHeight = Math.max(0, prevState.paddles[0].y - speed);
         return {
-          paddles: [{ x: 0, y: newY }, paddles[1]],
+          paddles: [{ x: 0, y: newHeight }, paddles[1]],
         };
       });
     }
@@ -59,12 +63,12 @@ class Pong extends Component {
       // Move the right paddle down (key: ArrowDown)
     if (event.key === 'ArrowDown') {
       this.setState((prevState) => {
-        const newY = Math.min(
+        const newHeight = Math.min(
           window.innerHeight - paddleSize,
           prevState.paddles[1].y + speed
         );
         return {
-          paddles: [paddles[0], { x: window.innerWidth - 10, y: newY }],
+          paddles: [paddles[0], { x: window.innerWidth - 10, y: newHeight }],
         };
       });
     }
@@ -72,12 +76,24 @@ class Pong extends Component {
     // Move the right paddle up (key: ArrowUp)
     if (event.key === 'ArrowUp') {
       this.setState((prevState) => {
-        const newY = Math.max(0, prevState.paddles[1].y - speed);
+        const newHeight = Math.max(0, prevState.paddles[1].y - speed);
         return {
-          paddles: [paddles[0], { x: window.innerWidth - 10, y: newY }],
+          paddles: [paddles[0], { x: window.innerWidth - 10, y: newHeight }],
         };
       });
     }
+  };
+    
+  handleRestart = () => {
+    // Reset the state to its initial values
+    this.setState({
+      position: { x: 0, y: 0 },
+      direction: { x: 1, y: 1 },
+      paddles: [
+        { x: 0, y: 0 },
+        { x: window.innerWidth - 10, y: 0 },
+      ],
+    });
   };
 
   updateBallPosition = () => {
@@ -140,7 +156,8 @@ class Pong extends Component {
 
     return (
       <div>
-        <pre style={ballStyle}>|o_o |</pre>
+          <pre style={ballStyle}>|o_o |</pre>
+	  <button onClick={this.handleRestart}>Restart</button>
         {paddles.map((paddle, index) => (
           <div
             key={index}
