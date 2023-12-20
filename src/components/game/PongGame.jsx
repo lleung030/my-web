@@ -11,6 +11,8 @@ class PongGame extends Component {
       ballY: 100,
       ballSpeedX: 5, // Adjust the ball speed as needed
       ballSpeedY: 5, // Adjust the ball speed as needed
+      score1: 0,
+      score2: 0,
     };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -86,12 +88,27 @@ class PongGame extends Component {
       this.setState({ ballSpeedY: -ballSpeedY });
     }
 
+    // Check if the ball passed the paddles and award points
+    if (newBallX < 0) {
+      // Player 2 (right paddle) scores a point
+      this.setState((prevState) => ({ score2: prevState.score2 + 1 }));
+      this.resetBall();
+    } else if (newBallX + ballSize > boardWidth) {
+      // Player 1 (left paddle) scores a point
+      this.setState((prevState) => ({ score1: prevState.score1 + 1 }));
+      this.resetBall();
+    }
+
     // Update ball position
     this.setState({ ballX: newBallX, ballY: newBallY });
   }
 
+  resetBall() {
+    this.setState({ ballX: 200, ballY: 100 });
+  }
+
   render() {
-    const { paddle1Y, paddle2Y, ballX, ballY } = this.state;
+    const { paddle1Y, paddle2Y, ballX, ballY, score1, score2 } = this.state;
     const paddleWidth = 10;
     const paddleHeight = 80;
     const ballSize = 10;
@@ -148,6 +165,10 @@ class PongGame extends Component {
           >
             | o__o |
           </div>
+        </div>
+        <div style={{ marginLeft: "20px" }}>
+          <p>Player 1 Score: {score1}</p>
+          <p>Player 2 Score: {score2}</p>
         </div>
       </div>
     );
