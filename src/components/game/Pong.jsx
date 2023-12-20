@@ -110,6 +110,7 @@ class Pong extends Component {
       y: y + direction.y * speed,
     };
 
+    // Check if the ball hits the window boundaries
     if (newPosition.x >= window.innerWidth - ballSize || newPosition.x <= 0) {
       // Handle scoring
       if (newPosition.x >= window.innerWidth - ballSize) {
@@ -123,9 +124,8 @@ class Pong extends Component {
           scores: { ...prevState.scores, right: prevState.scores.right + 1 },
         }));
       }
-	return
     }
-
+      
      if (newPosition.y >= windowHeight - ballSize || newPosition.y <= 0) {
       this.setState({
         direction: { x: direction.x, y: -direction.y },
@@ -143,7 +143,7 @@ class Pong extends Component {
         newPosition.x >= paddle.x &&
         newPosition.x <= paddle.x + 10 &&
         newPosition.y >= paddle.y &&
-        newPosition.y <= paddle.y + this.state.paddleSize
+        newPosition.y <= paddle.y //+ this.state.paddleSize
       ) {
         this.setState({
           direction: { x: -direction.x, y: direction.y },
