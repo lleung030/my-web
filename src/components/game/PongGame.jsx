@@ -53,7 +53,7 @@ class PongGame extends Component {
       });
     } else if (event.key === " ") {
       // Reset ball position only when the space bar is pressed
-      this.setState({ ballX: 200, ballY: 100 });
+      this.setState({ ballX: 200, ballY: 100, score1: 0, score2: 0 });
     }
   }
 
@@ -97,14 +97,19 @@ class PongGame extends Component {
       // Player 1 (left paddle) scores a point
       this.setState((prevState) => ({ score1: prevState.score1 + 1 }));
       this.resetBall();
+    } else {
+      // Update ball position
+      this.setState({ ballX: newBallX, ballY: newBallY });
     }
-
-    // Update ball position
-    this.setState({ ballX: newBallX, ballY: newBallY });
   }
 
   resetBall() {
-    this.setState({ ballX: 200, ballY: 100 });
+    this.setState({
+      ballX: 200,
+      ballY: 100,
+      paddle1Y: 50,
+      paddle2Y: 50,
+    });
   }
 
   render() {
