@@ -171,9 +171,10 @@ class PongGame extends Component {
             | o__o |
           </div>
         </div>
-        <div style={{ marginLeft: "20px" }}>
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
           <p>Player 1 Score: {score1}</p>
           <p>Player 2 Score: {score2}</p>
+          <p>"Hit spacebar to restart the game!!"</p>
         </div>
       </div>
     );
