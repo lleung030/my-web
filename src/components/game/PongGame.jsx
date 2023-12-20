@@ -49,8 +49,10 @@ class PongGame extends Component {
       this.setState({
         paddle1Y: Math.min(boardHeight - paddleHeight, paddle1Y + paddleSpeed),
       });
+    } else if (event.key === " ") {
+      // Reset ball position only when the space bar is pressed
+      this.setState({ ballX: 200, ballY: 100 });
     }
-    this.setState({ ballX: 200, ballY: 100 }); // Reset ball position on key press
   }
 
   moveBall() {
@@ -132,8 +134,8 @@ class PongGame extends Component {
             // height: `${ballSize}px`,
             background: "orange",
             // borderRadius: "50%",
-		fontFamily: "monospace",
-		fontSize: `${ballSize}px`,
+            fontFamily: "monospace",
+            fontSize: `${ballSize}px`,
           }}
         >
           | o__o |
