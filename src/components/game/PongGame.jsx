@@ -126,13 +126,14 @@ class PongGame extends Component {
         <div
           style={{
             position: "absolute",
-            left: `${ballX}px`,
+            left: `${ballX - ballSize / 2}px`,
             top: `${ballY}px`,
             // width: `${ballSize}px`,
             // height: `${ballSize}px`,
             background: "orange",
             // borderRadius: "50%",
-            fontFamily: "monospace",
+		fontFamily: "monospace",
+		fontSize: `${ballSize}px`,
           }}
         >
           | o__o |
