@@ -33,37 +33,23 @@ class PongGame extends Component {
     const boardHeight = 200; // Adjust the board height as needed
     const paddleHeight = 80;
 
-    switch (event.key) {
-      case "ArrowUp":
-        this.setState({
-          paddle2Y: Math.max(0, paddle2Y - paddleSpeed),
-        });
-        break;
-      case "ArrowDown":
-        this.setState({
-          paddle2Y: Math.min(
-            boardHeight - paddleHeight,
-            paddle2Y + paddleSpeed,
-          ),
-        });
-        break;
-      case "w":
-        this.setState({
-          paddle1Y: Math.max(0, paddle1Y - paddleSpeed),
-        });
-        break;
-      case "s":
-        this.setState({
-          paddle1Y: Math.min(
-            boardHeight - paddleHeight,
-            paddle1Y + paddleSpeed,
-          ),
-        });
-        break;
-      default:
-        break;
-    }
-    this.setState({ ballX: 200, ballY: 100 }); // Reset ball position on key press
+  if (event.key === 'ArrowUp') {
+    this.setState({
+      paddle2Y: Math.max(0, paddle2Y - paddleSpeed),
+    });
+  } else if (event.key === 'ArrowDown') {
+    this.setState({
+      paddle2Y: Math.min(boardHeight - paddleHeight, paddle2Y + paddleSpeed),
+    });
+  } else if (event.key === 'w') {
+    this.setState({
+      paddle1Y: Math.max(0, paddle1Y - paddleSpeed),
+    });
+  } else if (event.key === 's') {
+    this.setState({
+      paddle1Y: Math.min(boardHeight - paddleHeight, paddle1Y + paddleSpeed),
+    });
+  }    this.setState({ ballX: 200, ballY: 100 }); // Reset ball position on key press
   }
 
   moveBall() {
@@ -143,6 +129,7 @@ class PongGame extends Component {
             borderRadius: "50%",
           }}
         />
+        | o__o |
       </div>
     );
   }
