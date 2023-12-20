@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import TicTacToe from './components/game/TicTacToe';
 import Pong from './components/game/Pong';
+import PongGame from './components/game/PongGame';
 import Home from './components/home/Home';
 import About from './components/about/About';
 import Projects from './components/projects/Projects';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/tictactoe" element={<TicTacToe />} />
             <Route path="/pong" element={<Pong />} />
+            <Route path="/pong-game" element={<PongGame />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<ContactMe />} />
           </Routes>
