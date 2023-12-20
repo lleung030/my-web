@@ -30,7 +30,7 @@ class PongGame extends Component {
   }
 
   handleKeyDown(event) {
-    const { paddle1Y, paddle2Y } = this.state;
+    const { paddle1Y, paddle2Y, score1, score2 } = this.state;
     const paddleSpeed = 10;
     const boardHeight = 200; // Adjust the board height as needed
     const paddleHeight = 80;
@@ -54,6 +54,14 @@ class PongGame extends Component {
     } else if (event.key === "r") {
       // Reset ball position only when the "r" is pressed
       this.setState({ ballX: 200, ballY: 100, score1: 0, score2: 0 });
+    } else if (event.key === " ") {
+      // Check if the loser pressed spacebar before resetting the ball
+      if (
+        (score1 > score2 && event.key === " ") ||
+        (score2 > score1 && event.key === " ")
+      ) {
+        this.resetBall();
+      }
     }
   }
 
@@ -104,11 +112,17 @@ class PongGame extends Component {
   }
 
   resetBall() {
+    const { score1, score2 } = this.state;
+    const servingPlayer = score1 > score2 ? 1 : 2;
     this.setState({
       ballX: 200,
       ballY: 100,
       paddle1Y: 50,
       paddle2Y: 50,
+      ballSpeedX:
+        servingPlayer === 1
+          ? Math.abs(this.state.ballSpeedX)
+          : -Math.abs(this.state.ballSpeedX),
     });
   }
 
