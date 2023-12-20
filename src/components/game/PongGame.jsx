@@ -51,8 +51,8 @@ class PongGame extends Component {
       this.setState({
         paddle1Y: Math.min(boardHeight - paddleHeight, paddle1Y + paddleSpeed),
       });
-    } else if (event.key === " ") {
-      // Reset ball position only when the space bar is pressed
+    } else if (event.key === "r") {
+      // Reset ball position only when the "r" is pressed
       this.setState({ ballX: 200, ballY: 100, score1: 0, score2: 0 });
     }
   }
@@ -143,6 +143,7 @@ class PongGame extends Component {
               width: `${paddleWidth}px`,
               height: `${paddleHeight}px`,
               background: "#000",
+              zIndex: 1,
             }}
           />
           <div
@@ -153,6 +154,7 @@ class PongGame extends Component {
               width: `${paddleWidth}px`,
               height: `${paddleHeight}px`,
               background: "#000",
+              zIndex: 1,
             }}
           />
           <div
@@ -166,6 +168,7 @@ class PongGame extends Component {
               // borderRadius: "50%",
               fontFamily: "monospace",
               fontSize: `${ballSize}px`,
+              zIndex: 2,
             }}
           >
             | o__o |
@@ -174,7 +177,7 @@ class PongGame extends Component {
         <div style={{ marginTop: "20px", textAlign: "center" }}>
           <p>Player 1 Score: {score1}</p>
           <p>Player 2 Score: {score2}</p>
-          <p>"Hit spacebar to restart the game!!"</p>
+          <p>"Hit (R)estart to game!!"</p>
         </div>
       </div>
     );
