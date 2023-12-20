@@ -99,46 +99,55 @@ class PongGame extends Component {
     return (
       <div
         style={{
-          position: "relative",
-          width: "400px",
-          height: "200px",
-          border: "1px solid #000",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh", // Set the height to the full viewport height
         }}
       >
         <div
           style={{
-            position: "absolute",
-            left: "10px",
-            top: `${paddle1Y}px`,
-            width: `${paddleWidth}px`,
-            height: `${paddleHeight}px`,
-            background: "#000",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            right: "10px",
-            top: `${paddle2Y}px`,
-            width: `${paddleWidth}px`,
-            height: `${paddleHeight}px`,
-            background: "#000",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: `${ballX - ballSize / 2}px`,
-            top: `${ballY}px`,
-            // width: `${ballSize}px`,
-            // height: `${ballSize}px`,
-            background: "orange",
-            // borderRadius: "50%",
-            fontFamily: "monospace",
-            fontSize: `${ballSize}px`,
+            position: "relative",
+            width: "400px",
+            height: "200px",
+            border: "1px solid #000",
           }}
         >
-          | o__o |
+          <div
+            style={{
+              position: "absolute",
+              left: "10px",
+              top: `${paddle1Y}px`,
+              width: `${paddleWidth}px`,
+              height: `${paddleHeight}px`,
+              background: "#000",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: `${paddle2Y}px`,
+              width: `${paddleWidth}px`,
+              height: `${paddleHeight}px`,
+              background: "#000",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              left: `${ballX - ballSize / 2}px`,
+              top: `${ballY}px`,
+              // width: `${ballSize}px`,
+              // height: `${ballSize}px`,
+              background: "orange",
+              // borderRadius: "50%",
+              fontFamily: "monospace",
+              fontSize: `${ballSize}px`,
+            }}
+          >
+            | o__o |
+          </div>
         </div>
       </div>
     );
