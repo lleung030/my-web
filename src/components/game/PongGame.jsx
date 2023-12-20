@@ -33,23 +33,24 @@ class PongGame extends Component {
     const boardHeight = 200; // Adjust the board height as needed
     const paddleHeight = 80;
 
-  if (event.key === 'ArrowUp') {
-    this.setState({
-      paddle2Y: Math.max(0, paddle2Y - paddleSpeed),
-    });
-  } else if (event.key === 'ArrowDown') {
-    this.setState({
-      paddle2Y: Math.min(boardHeight - paddleHeight, paddle2Y + paddleSpeed),
-    });
-  } else if (event.key === 'w') {
-    this.setState({
-      paddle1Y: Math.max(0, paddle1Y - paddleSpeed),
-    });
-  } else if (event.key === 's') {
-    this.setState({
-      paddle1Y: Math.min(boardHeight - paddleHeight, paddle1Y + paddleSpeed),
-    });
-  }    this.setState({ ballX: 200, ballY: 100 }); // Reset ball position on key press
+    if (event.key === "ArrowUp") {
+      this.setState({
+        paddle2Y: Math.max(0, paddle2Y - paddleSpeed),
+      });
+    } else if (event.key === "ArrowDown") {
+      this.setState({
+        paddle2Y: Math.min(boardHeight - paddleHeight, paddle2Y + paddleSpeed),
+      });
+    } else if (event.key === "w") {
+      this.setState({
+        paddle1Y: Math.max(0, paddle1Y - paddleSpeed),
+      });
+    } else if (event.key === "s") {
+      this.setState({
+        paddle1Y: Math.min(boardHeight - paddleHeight, paddle1Y + paddleSpeed),
+      });
+    }
+    this.setState({ ballX: 200, ballY: 100 }); // Reset ball position on key press
   }
 
   moveBall() {
@@ -58,23 +59,27 @@ class PongGame extends Component {
     const boardWidth = 400; // Adjust the board width as needed
     const boardHeight = 200; // Adjust the board height as needed
     const ballSize = 10; // Adjust the ball size as needed
+    const paddleWidth = 10;
+    const paddleHeight = 80;
 
     let newBallX = ballX + ballSpeedX;
     let newBallY = ballY + ballSpeedY;
 
     // Check for collisions with paddles
     if (
-      (newBallX <= 20 && newBallY >= paddle1Y && newBallY <= paddle1Y + 80) ||
-      (newBallX >= boardWidth - 30 &&
-        newBallY >= paddle2Y &&
-        newBallY <= paddle2Y + 80)
+      (newBallX <= 20 + paddleWidth &&
+        newBallY + ballSize >= paddle1Y &&
+        newBallY <= paddle1Y + paddleHeight) ||
+      (newBallX + ballSize >= boardWidth - 30 - paddleWidth &&
+        newBallY + ballSize >= paddle2Y &&
+        newBallY <= paddle2Y + paddleHeight)
     ) {
       // Ball collided with paddle, reverse the X direction
       this.setState({ ballSpeedX: -ballSpeedX });
     }
 
     // Check for collisions with top and bottom walls
-    if (newBallY <= 0 || newBallY >= boardHeight - ballSize) {
+    if (newBallY <= 0 || newBallY + ballSize >= boardHeight) {
       // Ball collided with top or bottom wall, reverse the Y direction
       this.setState({ ballSpeedY: -ballSpeedY });
     }
@@ -123,13 +128,15 @@ class PongGame extends Component {
             position: "absolute",
             left: `${ballX}px`,
             top: `${ballY}px`,
-            width: `${ballSize}px`,
-            height: `${ballSize}px`,
-            background: "#000",
-            borderRadius: "50%",
+            // width: `${ballSize}px`,
+            // height: `${ballSize}px`,
+            background: "orange",
+            // borderRadius: "50%",
+            fontFamily: "monospace",
           }}
-        />
-        | o__o |
+        >
+          | o__o |
+        </div>
       </div>
     );
   }
