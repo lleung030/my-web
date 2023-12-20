@@ -111,9 +111,19 @@ class Pong extends Component {
     };
 
     if (newPosition.x >= window.innerWidth - ballSize || newPosition.x <= 0) {
-      this.setState({
-        position: { x: 0, y: 0 },
-      });
+      // Handle scoring
+      if (newPosition.x >= window.innerWidth - ballSize) {
+        // Right player out of bounds, left player scores
+        this.setState((prevState) => ({
+          scores: { ...prevState.scores, left: prevState.scores.left + 1 },
+        }));
+      } else {
+        // Left player out of bounds, right player scores
+        this.setState((prevState) => ({
+          scores: { ...prevState.scores, right: prevState.scores.right + 1 },
+        }));
+      }
+	return
     }
 
      if (newPosition.y >= windowHeight - ballSize || newPosition.y <= 0) {
