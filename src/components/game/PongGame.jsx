@@ -68,9 +68,9 @@ class PongGame extends Component {
   moveBall() {
     const { ballX, ballY, ballSpeedX, ballSpeedY, paddle1Y, paddle2Y } =
       this.state;
-    const boardWidth = 400; // Adjust the board width as needed
-    const boardHeight = 200; // Adjust the board height as needed
-    const ballSize = 10; // Adjust the ball size as needed
+    const boardWidth = 400; 
+    const boardHeight = 200; 
+    const ballSize = 10; 
     const paddleWidth = 10;
     const paddleHeight = 80;
 
@@ -79,10 +79,10 @@ class PongGame extends Component {
 
     // Check for collisions with paddles
     if (
-      (newBallX <= 20 + paddleWidth &&
+      (newBallX <=  paddleWidth &&
         newBallY + ballSize >= paddle1Y &&
         newBallY <= paddle1Y + paddleHeight) ||
-      (newBallX + ballSize >= boardWidth - 30 - paddleWidth &&
+      (newBallX + ballSize >= boardWidth - paddleWidth &&
         newBallY + ballSize >= paddle2Y &&
         newBallY <= paddle2Y + paddleHeight)
     ) {
@@ -113,16 +113,11 @@ class PongGame extends Component {
 
   resetBall() {
     const { score1, score2 } = this.state;
-    const servingPlayer = score1 > score2 ? 1 : 2;
     this.setState({
       ballX: 200,
       ballY: 100,
       paddle1Y: 50,
       paddle2Y: 50,
-      ballSpeedX:
-        servingPlayer === 1
-          ? Math.abs(this.state.ballSpeedX)
-          : -Math.abs(this.state.ballSpeedX),
     });
   }
 
@@ -138,7 +133,7 @@ class PongGame extends Component {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh", // Set the height to the full viewport height
+          height: "100vh", 
         }}
       >
         <div
@@ -152,22 +147,22 @@ class PongGame extends Component {
           <div
             style={{
               position: "absolute",
-              left: "10px",
+              left: "0px",
               top: `${paddle1Y}px`,
               width: `${paddleWidth}px`,
               height: `${paddleHeight}px`,
-              background: "#000",
+              background: "green",
               zIndex: 1,
             }}
           />
           <div
             style={{
               position: "absolute",
-              right: "10px",
+              right: "0px",
               top: `${paddle2Y}px`,
               width: `${paddleWidth}px`,
               height: `${paddleHeight}px`,
-              background: "#000",
+              background: "blue",
               zIndex: 1,
             }}
           />
@@ -176,16 +171,13 @@ class PongGame extends Component {
               position: "absolute",
               left: `${ballX - ballSize / 2}px`,
               top: `${ballY}px`,
-              // width: `${ballSize}px`,
-              // height: `${ballSize}px`,
               background: "orange",
-              // borderRadius: "50%",
               fontFamily: "monospace",
               fontSize: `${ballSize}px`,
               zIndex: 2,
             }}
           >
-            | o__o |
+            | o_._o |
           </div>
         </div>
         <div style={{ marginTop: "20px", textAlign: "center" }}>
