@@ -68,9 +68,9 @@ class PongGame extends Component {
   moveBall() {
     const { ballX, ballY, ballSpeedX, ballSpeedY, paddle1Y, paddle2Y } =
       this.state;
-    const boardWidth = 800; 
-    const boardHeight = 400; 
-    const ballSize = 10; 
+    const boardWidth = 800;
+    const boardHeight = 400;
+    const ballSize = 10;
     const paddleWidth = 10;
     const paddleHeight = 80;
 
@@ -79,12 +79,12 @@ class PongGame extends Component {
 
     // Check for collisions with paddles
     if (
-      (newBallX <=  paddleWidth && //knows the width
-        newBallY >= paddle1Y && //eliminates the top 
-        newBallY <= paddle1Y + paddleHeight) ||
-      (newBallX + ballSize >= boardWidth - paddleWidth &&
-        newBallY >= paddle2Y &&
-        newBallY <= paddle2Y + paddleHeight)
+      (newBallX <= paddleWidth && //knows the width
+        newBallY >= paddle1Y && //eliminates the bottom
+        newBallY <= paddle1Y + paddleHeight) || //eliminates the top
+      (newBallX >= boardWidth - paddleWidth && //knows where the right paddle is
+        newBallY >= paddle2Y && //eliminates the bottom
+        newBallY <= paddle2Y + paddleHeight) //eliminates the top
     ) {
       // Ball collided with paddle, reverse the X direction
       this.setState({ ballSpeedX: -ballSpeedX });
@@ -101,7 +101,7 @@ class PongGame extends Component {
       // Player 2 (right paddle) scores a point
       this.setState((prevState) => ({ score2: prevState.score2 + 1 }));
       this.resetBall();
-    } else if (newBallX + ballSize > boardWidth) {
+    } else if (newBallX > boardWidth) {
       // Player 1 (left paddle) scores a point
       this.setState((prevState) => ({ score1: prevState.score1 + 1 }));
       this.resetBall();
@@ -112,13 +112,26 @@ class PongGame extends Component {
   }
 
   resetBall() {
-    const { score1, score2 } = this.state;
-    this.setState({
-      ballX: 100,
-      ballY: 100,
-      paddle1Y: 50,
-      paddle2Y: 50,
-    });
+    const { score1, score2, paddle1Y, paddle2Y } = this.state;
+    const paddleWidth = 10;
+    const paddleHeight = 80;
+    const boardWidth = 800;
+    const ballSize = 10;
+    if (score1 < score2) {
+      this.setState({
+        ballX: ballSize + paddleWidth,
+        ballY: paddle1Y + paddleHeight / 2,
+        paddle1Y: 50,
+        paddle2Y: 50,
+      });
+    } else {
+      this.setState({
+        ballX: boardWidth - paddleWidth - ballSize,
+        ballY: paddle2Y + paddleHeight / 2,
+        paddle1Y: 50,
+        paddle2Y: 50,
+      });
+    }
   }
 
   render() {
@@ -133,7 +146,7 @@ class PongGame extends Component {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh", 
+          height: "100vh",
         }}
       >
         <div
