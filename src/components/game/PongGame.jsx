@@ -7,7 +7,7 @@ class PongGame extends Component {
     this.state = {
       paddle1Y: 50,
       paddle2Y: 50,
-      ballX: 200,
+      ballX: 100,
       ballY: 100,
       ballSpeedX: 5, // Adjust the ball speed as needed
       ballSpeedY: 5, // Adjust the ball speed as needed
@@ -32,7 +32,7 @@ class PongGame extends Component {
   handleKeyDown(event) {
     const { paddle1Y, paddle2Y, score1, score2 } = this.state;
     const paddleSpeed = 10;
-    const boardHeight = 200; // Adjust the board height as needed
+    const boardHeight = 400; // Adjust the board height as needed
     const paddleHeight = 80;
 
     if (event.key === "ArrowUp") {
@@ -68,8 +68,8 @@ class PongGame extends Component {
   moveBall() {
     const { ballX, ballY, ballSpeedX, ballSpeedY, paddle1Y, paddle2Y } =
       this.state;
-    const boardWidth = 400; 
-    const boardHeight = 200; 
+    const boardWidth = 800; 
+    const boardHeight = 400; 
     const ballSize = 10; 
     const paddleWidth = 10;
     const paddleHeight = 80;
@@ -114,7 +114,7 @@ class PongGame extends Component {
   resetBall() {
     const { score1, score2 } = this.state;
     this.setState({
-      ballX: 200,
+      ballX: 100,
       ballY: 100,
       paddle1Y: 50,
       paddle2Y: 50,
@@ -139,8 +139,8 @@ class PongGame extends Component {
         <div
           style={{
             position: "relative",
-            width: "400px",
-            height: "200px",
+            width: "800px",
+            height: "400px",
             border: "1px solid #000",
           }}
         >
