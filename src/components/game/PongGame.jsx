@@ -152,7 +152,6 @@ class PongGame extends Component {
               width: `${paddleWidth}px`,
               height: `${paddleHeight}px`,
               background: "green",
-              zIndex: 1,
             }}
           />
           <div
@@ -163,18 +162,16 @@ class PongGame extends Component {
               width: `${paddleWidth}px`,
               height: `${paddleHeight}px`,
               background: "blue",
-              zIndex: 1,
             }}
           />
           <div
             style={{
               position: "absolute",
-              left: `${ballX - ballSize / 2}px`,
+              left: `${ballX}px`,
               top: `${ballY}px`,
               background: "orange",
               fontFamily: "monospace",
               fontSize: `${ballSize}px`,
-              zIndex: 2,
             }}
           >
             | o_._o |
