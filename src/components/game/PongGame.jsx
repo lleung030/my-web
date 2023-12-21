@@ -9,8 +9,8 @@ class PongGame extends Component {
       paddle2Y: 50,
       ballX: 100,
       ballY: 100,
-      ballSpeedX: 5, // Adjust the ball speed as needed
-      ballSpeedY: 5, // Adjust the ball speed as needed
+      ballSpeedX: 5,
+      ballSpeedY: 5,
       score1: 0,
       score2: 0,
     };
@@ -21,7 +21,7 @@ class PongGame extends Component {
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeyDown);
-    this.ballInterval = setInterval(this.moveBall, 30); // Adjust the interval as needed
+    this.ballInterval = setInterval(this.moveBall, 30);
   }
 
   componentWillUnmount() {
@@ -32,7 +32,7 @@ class PongGame extends Component {
   handleKeyDown(event) {
     const { paddle1Y, paddle2Y, score1, score2 } = this.state;
     const paddleSpeed = 10;
-    const boardHeight = 400; // Adjust the board height as needed
+    const boardHeight = 400;
     const paddleHeight = 80;
 
     if (event.key === "ArrowUp") {
