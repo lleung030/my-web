@@ -79,11 +79,11 @@ class PongGame extends Component {
 
     // Check for collisions with paddles
     if (
-      (newBallX <=  paddleWidth &&
-        newBallY + ballSize >= paddle1Y &&
+      (newBallX <=  paddleWidth && //knows the width
+        newBallY >= paddle1Y && //eliminates the top 
         newBallY <= paddle1Y + paddleHeight) ||
       (newBallX + ballSize >= boardWidth - paddleWidth &&
-        newBallY + ballSize >= paddle2Y &&
+        newBallY >= paddle2Y &&
         newBallY <= paddle2Y + paddleHeight)
     ) {
       // Ball collided with paddle, reverse the X direction
