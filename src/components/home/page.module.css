@@ -21,7 +21,14 @@
   }
   
   .imageContainer {
-    text-align: center;
+      text-align: center;
+  }
+
+  img {
+      border-radius: 10%;
+      max-width: 100%;
+      height: auto;
+      width: auto;
   }
   
   .centeredImage {
