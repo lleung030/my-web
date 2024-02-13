@@ -16,6 +16,7 @@ function App() {
     <Router>
       <DarkModeProvider>
         <div>
+          <h1>hellow world</h1>
           <Navbar />
           <DarkModeToggle />
           <Routes>
