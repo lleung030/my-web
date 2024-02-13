@@ -8,6 +8,7 @@ import Home from './components/home/Home';
 import About from './components/about/About';
 import Projects from './components/projects/Projects';
 import ContactMe from './components/contact/ContactMe';
+import Settings from './components/settings/Settings';
 import DarkModeToggle from './components/darkmodetoggle/DarkModeToggle';
 import { DarkModeProvider } from './context/DarkModeContext';
 
@@ -18,6 +19,7 @@ function App() {
         <div>
           <Navbar />
           <DarkModeToggle />
+          <Settings />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
